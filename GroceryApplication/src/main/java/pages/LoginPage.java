@@ -13,15 +13,14 @@ public class LoginPage {
 		PageFactory.initElements(driver, this);
 	}
 
-	@FindBy(name = "username")
-	WebElement usernameElement;
-	@FindBy(name = "password")
-	WebElement passwordElement;
-	@FindBy(css = "label[for='remember']")
-	WebElement rememberBox;
-	@FindBy(xpath = "//button[text()='Sign In']")
-	WebElement signInBtn;
-
+	@FindBy(name = "username")WebElement usernameElement;
+	@FindBy(name = "password")WebElement passwordElement;
+	@FindBy(css = "label[for='remember']")WebElement rememberBox;
+	@FindBy(xpath = "//button[text()='Sign In']")WebElement signInBtn;
+	
+    @FindBy(xpath = "//p[text()='Dashboard']")WebElement dashboardTile;
+    @FindBy(xpath = "//b[text()='7rmart supermarket']")WebElement loginTitle;
+    @FindBy(xpath = "//div[@class='alert alert-danger alert-dismissible']") WebElement errorMsgElem;
 	public void enterUsername(String usernameValue) {
 		usernameElement.sendKeys(usernameValue);
 	}
@@ -36,6 +35,15 @@ public class LoginPage {
 
 	public void clickSignInBtn() {
 		signInBtn.click();
+	}
+	public boolean isDashbordDisplayed() {
+		return dashboardTile.isDisplayed();
+	}
+	public String isTitleDisplayed() {
+		return loginTitle.getText();
+	}
+	public boolean isEroorMsgDisplayed() {
+		return errorMsgElem.isDisplayed();
 	}
 
 }

@@ -2,6 +2,7 @@ package testScripts;
 
 import java.io.IOException;
 
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import applicationCore.ApplicationBase;
@@ -18,6 +19,9 @@ public class LoginTest extends ApplicationBase {
 		loginPage.enterPassword(passwordValue);
 		loginPage.checkRemember();
 		loginPage.clickSignInBtn();
+		//Assertion
+		boolean dashboardDisplay = loginPage.isDashbordDisplayed();
+		Assert.assertTrue(dashboardDisplay,"User was unable to login with valid username with valid credentials");
 	}
 	@Test
 	public void verifyLoginWithValidUsernameInvalidPassword() throws IOException {
@@ -28,7 +32,10 @@ public class LoginTest extends ApplicationBase {
 		loginPage.enterPassword(passwordValue);
 		loginPage.checkRemember();
 		loginPage.clickSignInBtn();
-
+		//Assertion
+		String expected = "7rmart supermarket";
+		String actual = loginPage.isTitleDisplayed();
+		Assert.assertEquals(actual, expected,"User was able to login with Invalid credentials");
 	}
 	@Test
 	public void verifyLoginWithInvalidUsernameValidPassword() throws IOException {
@@ -39,6 +46,9 @@ public class LoginTest extends ApplicationBase {
 		loginPage.enterPassword(passwordValue);
 		loginPage.checkRemember();
 		loginPage.clickSignInBtn();
+		//Asserion
+//		boolean isErrorDisplayed = loginPage.isEroorMsgDisplayed();
+//		Assert.assertFalse(isErrorDisplayed, "Error message is visible for valid credentials!");
 	}
 	@Test
 	public void verifyLoginWithInvalidCredentials() throws IOException {

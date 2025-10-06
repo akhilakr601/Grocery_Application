@@ -17,6 +17,7 @@ public class HomePage {
     @FindBy(xpath = "//i[@class='ace-icon fa fa-power-off']")
 	WebElement logoutLink;
     
+    
 
 
 	public void clickAdminLabel() {
@@ -25,4 +26,5 @@ public class HomePage {
 	public void clickLogout() {
 		logoutLink.click();
 	}
+	
 }
