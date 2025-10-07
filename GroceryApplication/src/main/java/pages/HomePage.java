@@ -16,7 +16,11 @@ public class HomePage {
 	WebElement adminLabel;
     @FindBy(xpath = "//i[@class='ace-icon fa fa-power-off']")
 	WebElement logoutLink;
-    
+	@FindBy(xpath = "//a[contains(@href,'list-admin') and contains(text(), 'More info')]")
+	WebElement adminInfolbl;
+	
+    @FindBy(xpath = "//a[contains(@href,'list-news') and contains(text(), 'More info')]")
+    WebElement manageNewsInfo;
     
 
 
@@ -25,6 +29,12 @@ public class HomePage {
 	}
 	public void clickLogout() {
 		logoutLink.click();
+	}
+	public void clickAdminInfo() {
+		adminInfolbl.click();
+	}
+	public void clickManageNewsInfo() {
+		manageNewsInfo.click();
 	}
 	
 }
