@@ -36,15 +36,14 @@ public class AdminTest extends ApplicationBase {
 		loginPage.enterPassword(passwordValue);
 		loginPage.checkRemember();
 		loginPage.clickSignInBtn();
-
-		// Accept Data
-		RandomDataUtility random = new RandomDataUtility();
-		
-		String adminUsernameValue = random.createRandomUserName();
-		String adminPasswordValue = random.createRandomPassword();
 		// Home Page
 		HomePage homepage = new HomePage(driver);
 		homepage.clickAdminInfo();
+		// Accept Data
+		RandomDataUtility random = new RandomDataUtility();
+		String adminUsernameValue = random.createRandomUserName();
+		String adminPasswordValue = random.createRandomPassword();
+
 		// Admin page
 		AdminPage adminPage = new AdminPage(driver);
 		adminPage.clickNewBtn();
@@ -54,8 +53,8 @@ public class AdminTest extends ApplicationBase {
 		adminPage.selectUserType(2);
 		adminPage.clickSaveBtn();
 		boolean isSuccessMessageVisible = adminPage.isSuccessMessageDisplayed();
-		Assert.assertTrue(isSuccessMessageVisible, "Success message not displayed after saving new user");
-
+		Assert.assertTrue(isSuccessMessageVisible, "Unable to create new user");
+		
 	}
 
 	@Test
@@ -78,6 +77,8 @@ public class AdminTest extends ApplicationBase {
 		adminPage.enterSearchUsername(searchUserValue);
 		adminPage.selectSearchUserType(2);
 		adminPage.clickSearchUserBtn();
+		String actualResult = adminPage.getSearchResult();
+		Assert.assertEquals(actualResult, searchUserValue,"Search result does not match expected username.");
 
 	}
 
@@ -95,7 +96,6 @@ public class AdminTest extends ApplicationBase {
 		homepage.clickAdminInfo();
 		// Admin
 		AdminPage adminPage = new AdminPage(driver);
-
 		adminPage.clickResetBtn();
 
 	}

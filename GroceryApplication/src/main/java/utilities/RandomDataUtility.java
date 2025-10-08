@@ -9,12 +9,15 @@ public class RandomDataUtility {
 	public String createRandomUserName() {
 		return faker.name().username();
 	}
+
 	public String createRandomPassword() {
 		return faker.internet().password();
 	}
+
 	public String createFullName() {
 		return faker.name().fullName();
 	}
+
 	public String createEmailId() {
 		return faker.internet().emailAddress();
 	}

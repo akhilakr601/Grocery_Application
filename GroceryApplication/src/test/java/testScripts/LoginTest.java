@@ -19,10 +19,11 @@ public class LoginTest extends ApplicationBase {
 		loginPage.enterPassword(passwordValue);
 		loginPage.checkRemember();
 		loginPage.clickSignInBtn();
-		//Assertion
+		// Assertion
 		boolean dashboardDisplay = loginPage.isDashbordDisplayed();
-		Assert.assertTrue(dashboardDisplay,"User was unable to login with valid username with valid credentials");
+		Assert.assertTrue(dashboardDisplay, "User was unable to login with valid credentials");
 	}
+
 	@Test
 	public void verifyLoginWithValidUsernameInvalidPassword() throws IOException {
 		String usernameValue = ExcelUtility.getStringData(1, 0, "LoginPageSheet");
@@ -32,11 +33,12 @@ public class LoginTest extends ApplicationBase {
 		loginPage.enterPassword(passwordValue);
 		loginPage.checkRemember();
 		loginPage.clickSignInBtn();
-		//Assertion
+		// Assertion
 		String expected = "7rmart supermarket";
 		String actual = loginPage.isTitleDisplayed();
-		Assert.assertEquals(actual, expected,"User was able to login with Invalid credentials");
+		Assert.assertEquals(actual, expected, "User is able to login with Invalid credentials");
 	}
+
 	@Test
 	public void verifyLoginWithInvalidUsernameValidPassword() throws IOException {
 		String usernameValue = ExcelUtility.getStringData(2, 0, "LoginPageSheet");
@@ -46,10 +48,11 @@ public class LoginTest extends ApplicationBase {
 		loginPage.enterPassword(passwordValue);
 		loginPage.checkRemember();
 		loginPage.clickSignInBtn();
-		//Asserion
-//		boolean isErrorDisplayed = loginPage.isEroorMsgDisplayed();
-//		Assert.assertFalse(isErrorDisplayed, "Error message is visible for valid credentials!");
+		// Asserion
+		boolean isErrorDisplayed = loginPage.isEroorMsgDisplayed();
+		Assert.assertFalse(isErrorDisplayed, "Error message is visible for valid credentials!");
 	}
+
 	@Test
 	public void verifyLoginWithInvalidCredentials() throws IOException {
 		String usernameValue = ExcelUtility.getStringData(3, 0, "LoginPageSheet");

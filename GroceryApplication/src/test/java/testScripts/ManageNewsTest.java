@@ -53,7 +53,7 @@ public class ManageNewsTest extends ApplicationBase {
 		managenewspage.clickSearchBtn();
 		String expectedNews = ExcelUtility.getStringData(0, 0, "ManageNewsPage");
 		String actualNews = managenewspage.getDataFromSearchResult();
-		Assert.assertEquals(actualNews, expectedNews,"The search result title does not match the expected news item.");
+		Assert.assertEquals(actualNews, expectedNews, "The search result title does not match the expected news item.");
 
 	}
 }

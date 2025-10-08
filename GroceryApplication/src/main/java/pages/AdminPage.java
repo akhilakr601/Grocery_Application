@@ -40,6 +40,7 @@ public class AdminPage {
 	WebElement resetUserElem;
 	@FindBy(xpath = "//div[@class='alert alert-success alert-dismissible']")
 	WebElement addUserAlert;
+	@FindBy(xpath = "//table/tbody/tr[1]/td[1]") WebElement searchResultTable;
 
 //	public void clickAdminInfo() {
 //		adminInfolbl.click();
@@ -87,7 +88,12 @@ public class AdminPage {
 	public void clickResetBtn() {
 		resetUserElem.click();
 	}
+
 	public boolean isSuccessMessageDisplayed() {
 		return addUserAlert.isDisplayed();
+	}
+	public String getSearchResult() {
+		return searchResultTable.getText();
+		
 	}
 }

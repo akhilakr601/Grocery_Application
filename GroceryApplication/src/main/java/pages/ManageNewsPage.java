@@ -29,7 +29,6 @@ public class ManageNewsPage {
 	WebElement searchBtn;
 	@FindBy(xpath = "//tr[1]/td[1]")
 	WebElement searchResultTable;
-	
 
 	public void clcikAddNewsBtn() {
 		addNewsBtn.click();
@@ -59,6 +58,7 @@ public class ManageNewsPage {
 	public void clickSearchBtn() {
 		searchBtn.click();
 	}
+
 	public String getDataFromSearchResult() {
 		return searchResultTable.getText();
 	}
