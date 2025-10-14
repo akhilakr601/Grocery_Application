@@ -3,6 +3,7 @@ package testScripts;
 import java.io.IOException;
 
 import org.testng.Assert;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import applicationCore.ApplicationBase;
@@ -10,7 +11,7 @@ import pages.LoginPage;
 import utilities.ExcelUtility;
 
 public class LoginTest extends ApplicationBase {
-	@Test
+	@Test(priority = 1,description = "User is trying to lgin with valid credentials",groups = {"smoke"})
 	public void verifyLoginWithValidCredentials() throws IOException {
 		String usernameValue = ExcelUtility.getStringData(0, 0, "LoginPageSheet");
 		String passwordValue = ExcelUtility.getStringData(0, 1, "LoginPageSheet");
@@ -24,9 +25,9 @@ public class LoginTest extends ApplicationBase {
 		Assert.assertTrue(dashboardDisplay, "User was unable to login with valid credentials");
 	}
 
-	@Test
+	@Test(priority = 2,retryAnalyzer = retry.Retry.class )
 	public void verifyLoginWithValidUsernameInvalidPassword() throws IOException {
-		String usernameValue = ExcelUtility.getStringData(1, 0, "LoginPageSheet");
+		String usernameValue = ExcelUtility.getStringData(11, 0, "LoginPageSheet");
 		String passwordValue = ExcelUtility.getStringData(1, 1, "LoginPageSheet");
 		LoginPage loginPage = new LoginPage(driver);
 		loginPage.enterUsername(usernameValue);
@@ -39,7 +40,7 @@ public class LoginTest extends ApplicationBase {
 		Assert.assertEquals(actual, expected, "User is able to login with Invalid credentials");
 	}
 
-	@Test
+	@Test(priority = 3)
 	public void verifyLoginWithInvalidUsernameValidPassword() throws IOException {
 		String usernameValue = ExcelUtility.getStringData(2, 0, "LoginPageSheet");
 		String passwordValue = ExcelUtility.getStringData(2, 1, "LoginPageSheet");
@@ -50,13 +51,15 @@ public class LoginTest extends ApplicationBase {
 		loginPage.clickSignInBtn();
 		// Asserion
 		boolean isErrorDisplayed = loginPage.isEroorMsgDisplayed();
-		Assert.assertFalse(isErrorDisplayed, "Error message is visible for valid credentials!");
+		Assert.assertTrue(isErrorDisplayed, "Error message was not displayed for invalid login!");
+
 	}
 
-	@Test
-	public void verifyLoginWithInvalidCredentials() throws IOException {
-		String usernameValue = ExcelUtility.getStringData(3, 0, "LoginPageSheet");
-		String passwordValue = ExcelUtility.getStringData(3, 1, "LoginPageSheet");
+	@Test(priority = 4,groups = {"smoke"},dataProvider = "loginProvider")
+	public void verifyLoginWithInvalidCredentials(String usernameValue,String passwordValue) throws IOException {
+//		String usernameValue = ExcelUtility.getStringData(3, 0, "LoginPageSheet");
+//		String passwordValue = ExcelUtility.getStringData(3, 1, "LoginPageSheet");
+		
 		LoginPage loginPage = new LoginPage(driver);
 		loginPage.enterUsername(usernameValue);
 		loginPage.enterPassword(passwordValue);
@@ -64,4 +67,11 @@ public class LoginTest extends ApplicationBase {
 		loginPage.clickSignInBtn();
 	}
 
+	@DataProvider(name = "loginProvider")
+	public Object[][] getDataFromDataProvider() throws IOException {
+
+	return new Object[][] { new Object[] { "admin", "admin22" }, new Object[] { "admin123", "123" },
+	// new Object[] {ExcelUtility.getStringData(3,
+	// 0,"Login"),ExcelUtility.getStringData(3,1 ,"Login")}
+	};}
 }
