@@ -7,6 +7,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import applicationCore.ApplicationBase;
+import constants.Constant;
 import pages.AdminPage;
 import pages.HomePage;
 import pages.LoginPage;
@@ -15,18 +16,9 @@ import utilities.RandomDataUtility;
 
 public class AdminTest extends ApplicationBase {
 
-	/**
-	 * public void verifyAdminUsersCard() throws IOException { // Login function
-	 * steps String usernameValue = ExcelUtility.getStringData(0, 0,
-	 * "LoginPageSheet"); String passwordValue = ExcelUtility.getStringData(0, 1,
-	 * "LoginPageSheet"); LoginPage loginPage = new LoginPage(driver);
-	 * loginPage.enterUsername(usernameValue);
-	 * loginPage.enterPassword(passwordValue); loginPage.checkRemember();
-	 * loginPage.clickSignInBtn(); // Admin Page HomePage homepage = new
-	 * HomePage(driver); homepage.clickAdminInfo(); }
-	 **/
+	
+	@Test(description = "Verify new user can be created using the New button")
 
-	@Test
 	public void verifyNewButtonFunctionality() throws IOException {
 		// Login function steps
 		String usernameValue = ExcelUtility.getStringData(0, 0, "LoginPageSheet");
@@ -53,7 +45,7 @@ public class AdminTest extends ApplicationBase {
 		adminPage.selectUserType(2);
 		adminPage.clickSaveBtn();
 		boolean isSuccessMessageVisible = adminPage.isSuccessMessageDisplayed();
-		Assert.assertTrue(isSuccessMessageVisible, "Unable to create new user");
+		Assert.assertTrue(isSuccessMessageVisible, Constant.newAdminUserError);
 		
 	}
 
@@ -78,7 +70,7 @@ public class AdminTest extends ApplicationBase {
 		adminPage.selectSearchUserType(2);
 		adminPage.clickSearchUserBtn();
 		String actualResult = adminPage.getSearchResult();
-		Assert.assertEquals(actualResult, searchUserValue,"Search result does not match expected username.");
+		Assert.assertEquals(actualResult, searchUserValue,Constant.searchAdminUserError);
 
 	}
 

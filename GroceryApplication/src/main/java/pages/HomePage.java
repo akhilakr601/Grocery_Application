@@ -36,5 +36,10 @@ public class HomePage {
 	public void clickManageNewsInfo() {
 		manageNewsInfo.click();
 	}
-	
+	public boolean isAdminLabelPresent() {
+        return adminLabel.isDisplayed();
+
+	}
+   
+
 }

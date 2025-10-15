@@ -6,6 +6,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import applicationCore.ApplicationBase;
+import constants.Constant;
 import pages.HomePage;
 import pages.LoginPage;
 import pages.ManageNewsPage;
@@ -30,7 +31,7 @@ public class ManageNewsTest extends ApplicationBase {
 		managenewspage.enterNewsContent(newsInfo);
 		managenewspage.clickSaveBtn();
 		boolean isMessageDisplayed = managenewspage.isSucessMessageDisplayed();
-		Assert.assertTrue(isMessageDisplayed, "News was not added successfully!");
+		Assert.assertTrue(isMessageDisplayed, Constant.addNewsError);
 
 	}
 
@@ -53,7 +54,7 @@ public class ManageNewsTest extends ApplicationBase {
 		managenewspage.clickSearchBtn();
 		String expectedNews = ExcelUtility.getStringData(0, 0, "ManageNewsPage");
 		String actualNews = managenewspage.getDataFromSearchResult();
-		Assert.assertEquals(actualNews, expectedNews, "The search result title does not match the expected news item.");
+		Assert.assertEquals(actualNews, expectedNews, Constant.searchNewsError);
 
 	}
 }

@@ -21,6 +21,8 @@ public class LoginPage {
     @FindBy(xpath = "//p[text()='Dashboard']")WebElement dashboardTile;
     @FindBy(xpath = "//b[text()='7rmart supermarket']")WebElement loginTitle;
     @FindBy(xpath = "//div[@class='alert alert-danger alert-dismissible']") WebElement errorMsgElem;
+    
+    
 	public void enterUsername(String usernameValue) {
 		usernameElement.sendKeys(usernameValue);
 	}
@@ -45,5 +47,13 @@ public class LoginPage {
 	public boolean isEroorMsgDisplayed() {
 		return errorMsgElem.isDisplayed();
 	}
-
+	public boolean isUsernameFieldDisplayed() {
+		
+		return usernameElement.isDisplayed();
+	}
+	
+	public String actualURL()
+	{
+		return driver.getCurrentUrl();
+	}
 }
