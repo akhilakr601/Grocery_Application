@@ -6,10 +6,12 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 
-import net.bytebuddy.asm.MemberSubstitution.FieldValue;//
+import net.bytebuddy.asm.MemberSubstitution.FieldValue;
+import utilities.PageUtility;//
 
 public class AdminPage {
 	public WebDriver driver;
+	public PageUtility page;
 
 	public AdminPage(WebDriver driver) {
 		this.driver = driver;
@@ -45,48 +47,63 @@ public class AdminPage {
 //	public void clickAdminInfo() {
 //		adminInfolbl.click();
 //	}
-	public void clickNewBtn() {
+	public AdminPage clickNewBtn() {
 		addNewUser.click();
+		return this;
 	}
 
-	public void enterUsername(String adminUsernameValue) {
+	public AdminPage  enterUsername(String adminUsernameValue) {
 		adminUsernameElem.sendKeys(adminUsernameValue);
+		return this;
 	}
 
-	public void enterPassword(String adminPasswordValue) {
+	public AdminPage enterPassword(String adminPasswordValue) {
 		adminPasswordElem.sendKeys(adminPasswordValue);
+		return this;
 	}
 
-	public void selectUserType(int index) {
-		Select userType = new Select(userTypeDrop);
-		userType.selectByIndex(index);
+	public AdminPage selectUserType(int index) {
+//		Select userType = new Select(userTypeDrop);
+//		userType.selectByIndex(index);
+		page.selectDropdownWithIndex(userTypeDrop, index);
+		
+		return this;
 
 	}
 
-	public void clickSaveBtn() {
+	public AdminPage clickSaveBtn() {
 		saveBtn.click();
+		return this;
 	}
 
-	public void clickSearchBtn() {
+	public AdminPage clickSearchBtn() {
 		searchUserBtnElem.click();
+		return this;
 	}
 
-	public void enterSearchUsername(String searchUserValue) {
+	public AdminPage enterSearchUsername(String searchUserValue) {
 		searchUserElem.sendKeys(searchUserValue);
-	}
-
-	public void selectSearchUserType(int index) {
-		Select searchUserType = new Select(searchUserTypeDrop);
-		searchUserType.selectByIndex(index);
+		return this;
 
 	}
 
-	public void clickSearchUserBtn() {
+	public AdminPage selectSearchUserType(int index) {
+//		Select searchUserType = new Select(searchUserTypeDrop);
+//		searchUserType.selectByIndex(index);
+		page.selectDropdownWithIndex(searchUserTypeDrop, index);
+		return this;
+
+
+	}
+
+	public AdminPage clickSearchUserBtn() {
 		searchUserBtn.click();
+		return this;
 	}
 
-	public void clickResetBtn() {
+	public AdminPage clickResetBtn() {
 		resetUserElem.click();
+		return this;
 	}
 
 	public boolean isSuccessMessageDisplayed() {

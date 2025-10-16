@@ -13,15 +13,11 @@ public class PageUtility {
 
 	}
 
-	public void clickElement(WebElement element) {
-
-		element.click();
+	public void selectDropdownWithIndex(WebElement element, int index) {
+	    Select dropdown = new Select(element);
+	    dropdown.selectByIndex(index);
 	}
 
-	public void typeText(WebElement element, String textToEnter) {
-		element.clear();
-		element.sendKeys(textToEnter);
-	}
 
 	public String getElementText(WebElement element) {
 		return element.getText();

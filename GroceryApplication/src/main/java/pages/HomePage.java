@@ -18,23 +18,27 @@ public class HomePage {
 	WebElement logoutLink;
 	@FindBy(xpath = "//a[contains(@href,'list-admin') and contains(text(), 'More info')]")
 	WebElement adminInfolbl;
-	
     @FindBy(xpath = "//a[contains(@href,'list-news') and contains(text(), 'More info')]")
     WebElement manageNewsInfo;
     
 
 
-	public void clickAdminLabel() {
+	public HomePage clickAdminLabel() {
 		adminLabel.click();
+		return this;
 	}
-	public void clickLogout() {
+	public LoginPage clickLogout() {
 		logoutLink.click();
+		return new LoginPage(driver);
 	}
-	public void clickAdminInfo() {
+	public AdminPage clickAdminInfo() {
 		adminInfolbl.click();
+		return new AdminPage(driver);
+		
 	}
-	public void clickManageNewsInfo() {
+	public ManageNewsPage clickManageNewsInfo() {
 		manageNewsInfo.click();
+		return new ManageNewsPage(driver);
 	}
 	public boolean isAdminLabelPresent() {
         return adminLabel.isDisplayed();

@@ -16,78 +16,61 @@ import utilities.RandomDataUtility;
 
 public class AdminTest extends ApplicationBase {
 
-	
-	@Test(description = "Verify new user can be created using the New button")
+	HomePage homePage;
+	AdminPage adminPage;
+	@Test(priority = 1, description = "user is trying to create new users")
 
 	public void verifyNewButtonFunctionality() throws IOException {
 		// Login function steps
 		String usernameValue = ExcelUtility.getStringData(0, 0, "LoginPageSheet");
 		String passwordValue = ExcelUtility.getStringData(0, 1, "LoginPageSheet");
 		LoginPage loginPage = new LoginPage(driver);
-		loginPage.enterUsername(usernameValue);
-		loginPage.enterPassword(passwordValue);
-		loginPage.checkRemember();
-		loginPage.clickSignInBtn();
-		// Home Page
-		HomePage homepage = new HomePage(driver);
-		homepage.clickAdminInfo();
+		loginPage.enterUsername(usernameValue).enterPassword(passwordValue).checkRemember();
+		homePage=loginPage.clickSignInBtn();
+		adminPage=homePage.clickAdminInfo();
+		adminPage.clickNewBtn();
+
 		// Accept Data
 		RandomDataUtility random = new RandomDataUtility();
 		String adminUsernameValue = random.createRandomUserName();
 		String adminPasswordValue = random.createRandomPassword();
 
-		// Admin page
-		AdminPage adminPage = new AdminPage(driver);
-		adminPage.clickNewBtn();
 		// add new user
-		adminPage.enterUsername(adminUsernameValue);
-		adminPage.enterPassword(adminPasswordValue);
-		adminPage.selectUserType(2);
-		adminPage.clickSaveBtn();
+		adminPage.enterUsername(adminUsernameValue).enterPassword(adminPasswordValue).selectUserType(2).clickSaveBtn();
+		
 		boolean isSuccessMessageVisible = adminPage.isSuccessMessageDisplayed();
 		Assert.assertTrue(isSuccessMessageVisible, Constant.newAdminUserError);
 		
 	}
 
-	@Test
+	@Test(priority = 2, description = "user is trying to search newly created user")
 	public void verifySearchFunctionality() throws IOException {
 		// Login function steps
 		String usernameValue = ExcelUtility.getStringData(0, 0, "LoginPageSheet");
 		String passwordValue = ExcelUtility.getStringData(0, 1, "LoginPageSheet");
 		LoginPage loginPage = new LoginPage(driver);
-		loginPage.enterUsername(usernameValue);
-		loginPage.enterPassword(passwordValue);
-		loginPage.checkRemember();
-		loginPage.clickSignInBtn();
+		loginPage.enterUsername(usernameValue).enterPassword(passwordValue).checkRemember();
+		homePage= loginPage.clickSignInBtn();
 		// search
-		HomePage homepage = new HomePage(driver);
-		homepage.clickAdminInfo();
-		AdminPage adminPage = new AdminPage(driver);
-//		adminPage.clickNewBtn();
+		adminPage=  homePage.clickAdminInfo();
 		adminPage.clickSearchBtn();
-		String searchUserValue = ExcelUtility.getStringData(0, 0, "AdminPage");
-		adminPage.enterSearchUsername(searchUserValue);
-		adminPage.selectSearchUserType(2);
-		adminPage.clickSearchUserBtn();
+		String searchUserValue = ExcelUtility.getStringData(0, 0, "AdminPageSheet");
+		adminPage.enterSearchUsername(searchUserValue).selectSearchUserType(2).clickSearchUserBtn();
 		String actualResult = adminPage.getSearchResult();
 		Assert.assertEquals(actualResult, searchUserValue,Constant.searchAdminUserError);
 
 	}
 
-	@Test
+	@Test(priority = 3,description = "User is doing refesh the page ")
 	public void verifyResetFunctionality() throws IOException {
 		// Login function steps
 		String usernameValue = ExcelUtility.getStringData(0, 0, "LoginPageSheet");
 		String passwordValue = ExcelUtility.getStringData(0, 1, "LoginPageSheet");
 		LoginPage loginPage = new LoginPage(driver);
-		loginPage.enterUsername(usernameValue);
-		loginPage.enterPassword(passwordValue);
-		loginPage.checkRemember();
-		loginPage.clickSignInBtn();
-		HomePage homepage = new HomePage(driver);
-		homepage.clickAdminInfo();
+		loginPage.enterUsername(usernameValue).enterPassword(passwordValue).checkRemember();
+		homePage =  loginPage.clickSignInBtn();
+		homePage.clickAdminInfo();
 		// Admin
-		AdminPage adminPage = new AdminPage(driver);
 		adminPage.clickResetBtn();
 
 	}

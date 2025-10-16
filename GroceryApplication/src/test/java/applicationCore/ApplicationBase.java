@@ -19,9 +19,10 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 import utilities.ScreenshotUtility;
 
 public class ApplicationBase {
+	public WebDriver driver;
+
 	Properties prop;
 	FileInputStream  fileInput;
-	public WebDriver driver;
 
 	@BeforeMethod(alwaysRun = true)
 	@Parameters("browsers")
@@ -57,7 +58,7 @@ public class ApplicationBase {
 		ScreenshotUtility screenShot = new ScreenshotUtility();
 		screenShot.getScreenshot(driver, iTestResult.getName());
 		}
-//		driver.quit();
+		driver.quit();
 
 		} 
 

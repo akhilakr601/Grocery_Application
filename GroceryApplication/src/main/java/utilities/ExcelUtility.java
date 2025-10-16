@@ -19,17 +19,22 @@ public class ExcelUtility {
 	public static String getStringData(int a, int b, String sheet) throws IOException// a & b row and cell/coloum values
 																						// in excel
 	{
+//		f = new FileInputStream("C:\\Users\\USER\\git\\Grocery_Application\\GroceryApplication\\src\\test\\resources\\Grocery_App_Data.xlsx");
 		f = new FileInputStream(Constant.TestDataFile);
+//		System.out.println("Attempting to open file at: " + Constant.TestDataFile);
+
 		wb = new XSSFWorkbook(f);
 		sh = wb.getSheet(sheet);
+
+//        String actualSheetName = sh.getSheetName();
+//        System.out.println(actualSheetName);
 		XSSFRow r = sh.getRow(a);
 		XSSFCell c = r.getCell(b);
 		return c.getStringCellValue();// method to get string value
 	}
 
 	public static String getIntegerData(int a, int b, String sheet) throws IOException {
-		f = new FileInputStream(
-				"C:\\Users\\USER\\eclipse-workspace\\GroceryApplication\\src\\test\\resources\\Grocery_App_Data.xlsx");
+		f = new FileInputStream(Constant.TestDataFile);
 		wb = new XSSFWorkbook(f);
 		sh = wb.getSheet(sheet);
 		XSSFRow r = sh.getRow(a);

@@ -4,7 +4,10 @@ public class Constant {
 	
 	
 	public static final String ConfigFile = System.getProperty("user.dir")+"\\src\\main\\resources\\config.properties";
+	
 	public static final String TestDataFile = System.getProperty("user.dir")+"\\src\\test\\resources\\Grocery_App_Data.xlsx";
+	
+	
 	
 	public static final String validCredentialError = "User was unable to login with valid credentials";
 	public static final String invalidPasswordError = "User is able to login with Invalid credentials";
