@@ -11,7 +11,7 @@ import utilities.PageUtility;//
 
 public class AdminPage {
 	public WebDriver driver;
-	public PageUtility page;
+	PageUtility page = new PageUtility();
 
 	public AdminPage(WebDriver driver) {
 		this.driver = driver;

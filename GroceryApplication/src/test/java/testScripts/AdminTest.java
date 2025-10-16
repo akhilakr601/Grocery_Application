@@ -43,7 +43,7 @@ public class AdminTest extends ApplicationBase {
 		
 	}
 
-	@Test(priority = 2, description = "user is trying to search newly created user")
+	@Test(priority = 3, description = "user is trying to search newly created user")
 	public void verifySearchFunctionality() throws IOException {
 		// Login function steps
 		String usernameValue = ExcelUtility.getStringData(0, 0, "LoginPageSheet");
@@ -61,7 +61,7 @@ public class AdminTest extends ApplicationBase {
 
 	}
 
-	@Test(priority = 3,description = "User is doing refesh the page ")
+	@Test(priority = 2,description = "User is doing refesh the page ")
 	public void verifyResetFunctionality() throws IOException {
 		// Login function steps
 		String usernameValue = ExcelUtility.getStringData(0, 0, "LoginPageSheet");
